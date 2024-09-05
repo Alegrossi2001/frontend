@@ -1,0 +1,83 @@
+import { Task } from "../../../INTERFACES/Task";
+
+export const tempdata: Task[] = [
+    {
+        id: "1",
+        title: "Design landing page",
+        description: "Create a modern and responsive landing page for the new product.",
+        score: 85,
+        urgencyLevel: "high",
+        assignedBy: "Alice Johnson",
+        assignedTo: "Bob Smith",
+        dueDate: new Date("2024-09-10").toISOString(),
+        completed: false,
+        project: "Product Launch",
+        status: "in progress",
+        priority: "high",
+        tags: ["UI/UX", "Frontend", "Design"],
+        createdAt: new Date("2024-09-01").toISOString()
+    },
+    {
+        id: "2",
+        title: "Database optimization",
+        description: "Improve the performance of database queries and indexing.",
+        score: 70,
+        urgencyLevel: "medium",
+        assignedBy: "David Lee",
+        assignedTo: "Eve Thompson",
+        completed: false,
+        project: "Backend Revamp",
+        status: "not started",
+        priority: "medium",
+        tags: ["Database", "Performance"],
+        createdAt: new Date("2024-09-03").toISOString()
+
+    },
+    {
+        id: "3",
+        title: "Team meeting",
+        description: "Conduct a meeting to discuss the project status and next steps.",
+        score: 50,
+        urgencyLevel: "low",
+        assignedBy: "Carol White",
+        assignedTo: "Bob Smith",
+        dueDate: new Date("2024-09-05").toISOString(),
+        completed: true,
+        project: "Product Launch",
+        status: "completed",
+        priority: "low",
+        tags: ["Meeting", "Team"],
+        createdAt: new Date("2024-08-30").toISOString()
+    },
+    {
+        id: "4",
+        title: "Design landing page",
+        description: "Create a modern and responsive landing page for the new product.",
+        score: 85,
+        urgencyLevel: "high",
+        assignedBy: "Alice Johnson",
+        assignedTo: "Bob Smith",
+        dueDate: new Date("2024-09-10").toISOString(),
+        completed: false,
+        project: "Product Launch",
+        status: "in progress",
+        priority: "high",
+        tags: ["UI/UX", "Frontend", "Design"],
+        createdAt: new Date("2024-09-01").toISOString()
+    },
+    {
+        id: "5",
+        title: "Database optimization",
+        description: "Improve the performance of database queries and indexing.",
+        score: 70,
+        urgencyLevel: "medium",
+        assignedBy: "David Lee",
+        assignedTo: "Eve Thompson",
+        completed: false,
+        project: "Backend Revamp",
+        status: "not started",
+        priority: "medium",
+        tags: ["Database", "Performance"],
+        createdAt: new Date("2024-09-03").toISOString()
+    },
+];
