@@ -11,8 +11,21 @@ interface UserLoggedOut {
 
 type AuthAction = UserAuthenticated | UserLoggedOut;
 
+const initialState: Auth = {
+    isAuthenticated: false,
+    token: '',
+    refreshToken: '',
+    role: '',
+    expiresAt: 0,
+    loading: false,
+    sessionId: '',
+    userId: '',
+    username: '',
+    email: '',
+};
+
 // Reducer
-export default function authReducer(state: Auth, action: AuthAction): Auth {
+export default function authReducer(state: Auth = initialState, action: AuthAction): Auth {
     switch (action.type) {
         case 'userAuthenticated':
             action.payload.sessionId = generateGUID();

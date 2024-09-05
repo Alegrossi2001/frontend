@@ -23,12 +23,12 @@ const Dropdown: React.FC<{
 export default function TaskBoard() {
 
     const [getTask, setTask] = useState<Task | undefined>();
-    const [data, setData] = useState<Task[]>(store.getState());
+    const [data, setData] = useState<Task[]>(store.getState().tasks);
     const [open, setOpen] = useState(false);
 
     store.subscribe(() => {
         const state = store.getState();
-        setData(state);
+        setData(state.tasks);
     });
 
     const OpenTask = (row: Task, event: any) => {
