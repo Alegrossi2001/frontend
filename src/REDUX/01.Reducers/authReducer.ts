@@ -28,11 +28,8 @@ const initialState: Auth = {
 export default function authReducer(state: Auth = initialState, action: AuthAction): Auth {
     switch (action.type) {
         case 'userAuthenticated':
-            return {
-                ...state,  // Maintain the existing state
-                ...action.payload,  // Overwrite with new auth data
-                sessionId: generateGUID(),  // Generate a new session ID
-            };
+            action.payload.sessionId = generateGUID();
+            return action.payload;
 
         case 'userLoggedOut':
             return {
