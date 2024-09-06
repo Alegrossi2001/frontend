@@ -16,7 +16,7 @@ import {
 } from '@mui/material';
 
 
-import store from '../../REDUX/00.Store/store';
+import { store } from '../../REDUX/00.Store/store';
 
 interface AddTaskModalProps {
     open: boolean;

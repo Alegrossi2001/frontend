@@ -1,10 +1,9 @@
 import DataTable, { TableColumn } from "react-data-table-component"
-import { tempdata } from "./TEMP/data"
 import { useState } from "react";
 import TaskModal from "./TaskModal";
 import TaskInteractionBar from "./TaskInteractionBar";
 import { Task } from "../../INTERFACES/Task";
-import store from "../../REDUX/00.Store/store";
+import { store } from "../../REDUX/00.Store/store";
 
 const Dropdown: React.FC<{
     options: { value: Task['status']; label: string }[];
@@ -23,14 +22,16 @@ const Dropdown: React.FC<{
 export default function TaskBoard() {
 
     const [getTask, setTask] = useState<Task | undefined>();
-    const [data, setData] = useState<Task[]>(store.getState().tasks);
+    const [data, setData] = useState<Task[]>(() => {
+        const state = store.getState();
+        return Array.isArray(state.tasks) ? state.tasks : [];
+    });
     const [open, setOpen] = useState(false);
 
     store.subscribe(() => {
         const state = store.getState();
         setData(state.tasks);
     });
-
     const OpenTask = (row: Task, event: any) => {
         const task = data.find((item) => item.id === row.id);
         setTask(task);
