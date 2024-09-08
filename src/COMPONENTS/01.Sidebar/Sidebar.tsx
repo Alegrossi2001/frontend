@@ -13,7 +13,7 @@ import ListItemButton from '@mui/material/ListItemButton';
 import ListItemText from '@mui/material/ListItemText';
 import ListSubheader from '@mui/material/ListSubheader';
 import { Suspense } from 'react';
-import ContentRouter from '../00.ContentRouter/ContentRouter';
+import { Outlet } from 'react-router';
 
 const drawerWidth = 240;
 
@@ -89,7 +89,7 @@ export default function Sidebar() {
                 <Box component="main">
                     <Toolbar />
                     <Suspense fallback={<div>Loading...</div>}>
-                        <ContentRouter />
+                        <Outlet></Outlet>
                     </Suspense>
                 </Box>
             </Box>

@@ -4,20 +4,30 @@ import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Routes, Route } from 'react-router-dom';
 import UserProfileBoard from '../997.UserProfileBoard/userprofileboard';
+import { useNavigate } from 'react-router-dom';
+
+
+const buttonStyle = {
+    my: 2,
+    color: 'white',
+    display: 'block'
+}
 
 function UserNavbar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
-
+    const navigate = useNavigate();
     const handleCloseNavMenu = () => {
         setAnchorElNav(null);
     };
 
     const handlePageChange = (page: string) => {
-        //navigate(`/user/account)}`);
+        if (page === "Return") {
+            navigate('/');
+        }
     };
 
-    const pages = ['Account']; // Example pages array, adjust it to your needs
+    const pages = ['Account', "Return"];
 
     return (
         <>
@@ -97,15 +107,21 @@ function UserNavbar() {
                             LOGO
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
-                            {pages.map((page) => (
-                                <Button
-                                    key={page}
-                                    onClick={() => handlePageChange(page)}
-                                    sx={{ my: 2, color: 'white', display: 'block' }}
-                                >
-                                    {page}
-                                </Button>
-                            ))}
+                            <Button
+                                key="Account"
+                                onClick={() => handlePageChange("Account")}
+                                sx={buttonStyle}
+                            >
+                                Account
+                            </Button>
+                            <Button
+                                key="Return"
+                                onClick={() => handlePageChange("Return")}
+                                sx={buttonStyle}
+                            >
+                                Return
+                            </Button>
+
                         </Box>
                     </Toolbar>
                 </Container>
