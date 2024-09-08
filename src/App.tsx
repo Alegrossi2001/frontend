@@ -10,10 +10,13 @@ import PageNotFound from './COMPONENTS/00.404Page/404Page';
 import Calendar from './COMPONENTS/03.Calendar/Calendar';
 import AccountNavbar from './COMPONENTS/User/02.AccountNavBar/AccountNavbar';
 import UserInfo from './COMPONENTS/User/03.info/UserInfo';
+import CommunicationLayout from './COMPONENTS/Communication/MainLayout';
+import AuthGuard from './AuthGuard';
+
 const router = createBrowserRouter([
   {
     path: '/',
-    element: <Sidebar />,
+    element: <AuthGuard><Sidebar /></AuthGuard>,
     errorElement: <PageNotFound />,
     children: [
       {
@@ -29,7 +32,7 @@ const router = createBrowserRouter([
   },
   {
     path: '/user',
-    element: <UserNavbar />,
+    element: <AuthGuard><UserNavbar /></AuthGuard>,
     children: [
       {
         path: 'account',
@@ -47,6 +50,9 @@ const router = createBrowserRouter([
   },
   {
     path: '/signin', element: <Signin />
+  },
+  {
+    path: '/communicate', element: <AuthGuard><CommunicationLayout /></AuthGuard>,
   }
 ]);
 
