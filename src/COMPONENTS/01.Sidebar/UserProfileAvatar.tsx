@@ -1,8 +1,14 @@
 import React, { useState, MouseEvent } from 'react';
-import { Avatar, Menu, MenuItem, IconButton } from '@mui/material';
+import { Avatar, Menu, MenuItem, IconButton, ListItem, Divider, Box, Icon } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
+import { Numbers, Person } from '@mui/icons-material';
+import { useSelector } from 'react-redux';
+import { RootState } from '../../REDUX/Reducer';
 
 const UserProfileAvatar: React.FC = () => {
+    //Redux
+    const userName = useSelector((state: RootState) => state.user.username);
+    const equippedBadge = useSelector((state: RootState) => state.user.equippedBadge);
     //Hooks
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
@@ -41,10 +47,22 @@ const UserProfileAvatar: React.FC = () => {
                     vertical: 'top',
                     horizontal: 'right',
                 }}
+                PaperProps={{
+                    style: {
+                        width: '300px',
+                        padding: '10px',
+                    },
+                }}
             >
-                <MenuItem onClick={handleProfile}>My Profile</MenuItem>
-                <MenuItem onClick={handleLeaderboard}>Leaderboard</MenuItem>
-                {/*<MenuItem onClick={HandleLogout}>Logout</MenuItem>*/}
+                <ListItem style={{ fontSize: '1.2rem' }}><b>{userName}</b></ListItem>
+                <ListItem style={{ fontSize: '1.2rem' }}>Equipped Title: <b>{equippedBadge}</b></ListItem>
+                <Divider />
+                <Box>
+
+                    <MenuItem onClick={handleProfile} style={{ fontSize: '1rem' }}><Person /> My Profile</MenuItem>
+                    <MenuItem onClick={handleLeaderboard} style={{ fontSize: '1rem' }}><Numbers />Leaderboard</MenuItem>
+                    {/*<MenuItem onClick={HandleLogout} style={{ fontSize: '1.1rem' }}>Logout</MenuItem>*/}
+                </Box>
             </Menu>
         </>
     );

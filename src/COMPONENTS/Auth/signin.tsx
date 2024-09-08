@@ -2,10 +2,14 @@ import React from 'react';
 import { Container, Box, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, Link, Grid } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
+import { UseLogin } from '../../HOOKS/UseLogin';
 
 const Signin: React.FC = () => {
 
+    const authenticateUser = UseLogin();
+
     const SetLogin = () => {
+        authenticateUser();
         navigate('/');
     }
     const navigate = useNavigate();
