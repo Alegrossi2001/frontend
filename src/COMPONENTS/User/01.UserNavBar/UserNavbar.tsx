@@ -1,10 +1,9 @@
 import React from 'react';
-import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Typography } from '@mui/material';
+import { AppBar, Box, Button, Container, IconButton, Menu, Toolbar, Typography } from '@mui/material';
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
-import { Routes, Route } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
-
+import { Outlet } from 'react-router-dom';
 
 const buttonStyle = {
     my: 2,
@@ -12,7 +11,7 @@ const buttonStyle = {
     display: 'block'
 }
 
-function UserNavbar() {
+export default function UserNavbar() {
 
     const [anchorElNav, setAnchorElNav] = React.useState<null | HTMLElement>(null);
     const navigate = useNavigate();
@@ -24,9 +23,12 @@ function UserNavbar() {
         if (page === "Return") {
             navigate('/');
         }
+        else {
+            navigate(`/user/${page}`);
+        }
     };
 
-    const pages = ['Account', "Return"];
+
 
     return (
         <>
@@ -38,7 +40,6 @@ function UserNavbar() {
                             variant="h6"
                             noWrap
                             component="a"
-                            href="#app-bar-with-responsive-menu"
                             sx={{
                                 mr: 2,
                                 display: { xs: 'none', md: 'flex' },
@@ -79,11 +80,7 @@ function UserNavbar() {
                                 onClose={handleCloseNavMenu}
                                 sx={{ display: { xs: 'block', md: 'none' } }}
                             >
-                                {pages.map((page) => (
-                                    <MenuItem key={page} onClick={() => { handlePageChange(page); handleCloseNavMenu(); }}>
-                                        <Typography sx={{ textAlign: 'center' }}>{page}</Typography>
-                                    </MenuItem>
-                                ))}
+
                             </Menu>
                         </Box>
                         <AdbIcon sx={{ display: { xs: 'flex', md: 'none' }, mr: 1 }} />
@@ -106,13 +103,15 @@ function UserNavbar() {
                             LOGO
                         </Typography>
                         <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
+                            {/* Account Button to modify your account */}
                             <Button
-                                key="Account"
+                                key={"Account"}
                                 onClick={() => handlePageChange("Account")}
                                 sx={buttonStyle}
                             >
                                 Account
                             </Button>
+                            {/* Return Button to return to the main page */}
                             <Button
                                 key="Return"
                                 onClick={() => handlePageChange("Return")}
@@ -125,21 +124,13 @@ function UserNavbar() {
                     </Toolbar>
                 </Container>
             </AppBar>
-            <Box sx={{ pt: 10 }}>
-
+            <Toolbar />
+            <Box sx={{ flexGrow: 1, p: 3 }}>
+                <Container>
+                    <Outlet />
+                </Container>
             </Box>
         </>
     );
 }
 
-// Move this outside of UserNavbar component
-function UserRoutes() {
-    return (
-        <Routes>
-            <Route path="/" element={<UserNavbar />}>
-            </Route>
-        </Routes>
-    );
-}
-
-export default UserRoutes;

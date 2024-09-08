@@ -1,19 +1,22 @@
 import * as React from 'react';
-import Box from '@mui/material/Box';
-import Drawer from '@mui/material/Drawer';
-import AppBar from '@mui/material/AppBar';
-import CssBaseline from '@mui/material/CssBaseline';
-import Toolbar from '@mui/material/Toolbar';
-import List from '@mui/material/List';
-import Typography from '@mui/material/Typography';
-import Divider from '@mui/material/Divider';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
-
-import ListItemText from '@mui/material/ListItemText';
-import ListSubheader from '@mui/material/ListSubheader';
+import {
+    Box,
+    Drawer,
+    AppBar,
+    CssBaseline,
+    Toolbar,
+    List,
+    Typography,
+    Divider,
+    ListItem,
+    ListItemButton,
+    ListItemText,
+    ListSubheader,
+} from '@mui/material';
 import { Suspense } from 'react';
 import { Outlet } from 'react-router';
+import { Grid } from '@mui/material';
+import UserProfileAvatar from './UserProfileAvatar';
 
 const drawerWidth = 240;
 
@@ -30,9 +33,21 @@ export default function Sidebar() {
             <CssBaseline />
             <AppBar position="fixed" sx={{ zIndex: (theme: any) => theme.zIndex.drawer + 1 }}>
                 <Toolbar>
-                    <Typography variant="h6" noWrap component="div">
-                        Link1 Manager
-                    </Typography>
+                    <Grid container spacing={2} alignItems="center">
+                        <Grid item xs={4}>
+                            <Typography variant="h6" noWrap>
+                                Link1 Social
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4} sx={{ textAlign: 'center' }}>
+                            <Typography variant="h6" noWrap>
+                                <b>Alex Grossi's App</b>
+                            </Typography>
+                        </Grid>
+                        <Grid item xs={4} sx={{ textAlign: 'right' }}>
+                            <UserProfileAvatar />
+                        </Grid>
+                    </Grid>
                 </Toolbar>
             </AppBar>
             <Drawer
