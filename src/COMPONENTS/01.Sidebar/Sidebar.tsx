@@ -36,7 +36,7 @@ export default function Sidebar() {
                     <Grid container spacing={2} alignItems="center">
                         <Grid item xs={4}>
                             <Typography variant="h6" noWrap>
-                                Link1 Social
+                                Link1 Manager
                             </Typography>
                         </Grid>
                         <Grid item xs={4} sx={{ textAlign: 'center' }}>
