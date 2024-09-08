@@ -3,7 +3,6 @@ import { AppBar, Box, Button, Container, IconButton, Menu, MenuItem, Toolbar, Ty
 import AdbIcon from '@mui/icons-material/Adb';
 import MenuIcon from '@mui/icons-material/Menu';
 import { Routes, Route } from 'react-router-dom';
-import UserProfileBoard from '../997.UserProfileBoard/userprofileboard';
 import { useNavigate } from 'react-router-dom';
 
 
@@ -127,8 +126,7 @@ function UserNavbar() {
                 </Container>
             </AppBar>
             <Box sx={{ pt: 10 }}>
-                {/* <Outlet /> */}
-                <UserProfileBoard />
+
             </Box>
         </>
     );
