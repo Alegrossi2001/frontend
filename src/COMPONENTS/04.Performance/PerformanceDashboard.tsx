@@ -2,9 +2,12 @@ import { Typography } from "@mui/material";
 import L1LineChart, { L1LinechartData } from "../../REUSABLES/Charts/L1Linechart";
 import Grid from "@mui/material/Grid2";
 import Counter from "../../REUSABLES/Counter";
-
+import { useSelector } from "react-redux";
+import { RootState } from "../../REDUX/Reducer";
 
 export default function PerformanceDashboard() {
+
+    const totalScore = useSelector((state: RootState) => state.user.points);
 
     const data: L1LinechartData[] = [
         { day: 1, tasksCompleted: 13, tasksPending: 1, score: 41 },
@@ -22,7 +25,6 @@ export default function PerformanceDashboard() {
         return data.map(d => d.tasksPending).reduce((sum, current) => sum + current, 0);
     }
 
-    const score: number = data.map(d => d.score).reduce((sum, current) => sum + current, 0);
     const feedbackReceived = 10;
     return (
         <div>
@@ -35,7 +37,7 @@ export default function PerformanceDashboard() {
                     <Counter count={tasksPending()} label="Tasks pending" />
                 </Grid>
                 <Grid size={2} container justifyContent="center">
-                    <Counter count={score} label="My Score" />
+                    <Counter count={totalScore ?? 0} label="My Score" />
                     <Counter count={feedbackReceived} label="Feedback received" />
 
                 </Grid>
