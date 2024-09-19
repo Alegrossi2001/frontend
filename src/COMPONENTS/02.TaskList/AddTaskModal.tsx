@@ -17,6 +17,7 @@ import {
 
 
 import store from '../../REDUX/00.Store/store';
+import { UseCreateScore } from '../../HOOKS/UseCreateScore';
 
 interface AddTaskModalProps {
     open: boolean;
@@ -26,7 +27,6 @@ interface AddTaskModalProps {
 interface TaskFormInputs {
     title: string;
     description?: string;
-    score: number;
     urgencyLevel: 'low' | 'medium' | 'high';
     assignedBy: string;
     assignedTo: string;
@@ -43,14 +43,16 @@ interface TaskFormInputs {
 export default function AddTaskModal({ open, handleClose }: AddTaskModalProps) {
 
     const { register, handleSubmit, formState: { errors } } = useForm<TaskFormInputs>();
+    const score = (task: Task) => {
+        return UseCreateScore(task);
+    };
 
     const onSubmit: SubmitHandler<TaskFormInputs> = (data) => {
-        // Convert form inputs to Taskaa object
         const taskData: Task = {
             id: 'unique-id', // Ideally, generate a unique ID here
             title: data.title,
             description: data.description,
-            score: data.score,
+            score: 0,
             urgencyLevel: data.urgencyLevel,
             assignedBy: data.assignedBy,
             assignedTo: data.assignedTo,
@@ -62,6 +64,8 @@ export default function AddTaskModal({ open, handleClose }: AddTaskModalProps) {
             tags: data.tags ? data.tags.split(',').map(tag => tag.trim()) : undefined,
             createdAt: Date.now().toString(),
         };
+        taskData.score = score(taskData);
+        console.log(taskData.score);
         store.dispatch({
             type: 'taskAdded',
             payload: taskData,
@@ -94,17 +98,6 @@ export default function AddTaskModal({ open, handleClose }: AddTaskModalProps) {
                             multiline
                             rows={4}
                             {...register("description")}
-                        />
-                    </Grid>
-
-                    <Grid item xs={12}>
-                        <TextField
-                            fullWidth
-                            type="number"
-                            label="Score"
-                            {...register("score", { required: "Score is required", valueAsNumber: true, min: 0 })}
-                            error={!!errors.score}
-                            helperText={errors.score?.message}
                         />
                     </Grid>
 

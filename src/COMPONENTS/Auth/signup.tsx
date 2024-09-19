@@ -5,15 +5,22 @@ import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
 
 const Signup: React.FC = () => {
+
+
     const [email, setEmail] = useState('');
     const [validateEmail, setValidateEmail] = useState('');
     const [username, setUsername] = useState('');
-
     const [password, setPassword] = useState('');
+    const signup = console.log('signup');
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-
+        try {
+            //await (await signup).authenticateUser();
+        }
+        catch (error) {
+            console.error(error);
+        }
     };
 
     return (

@@ -2,17 +2,20 @@ import React from 'react';
 import { Container, Box, Avatar, Typography, TextField, FormControlLabel, Checkbox, Button, Link, Grid } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import { useNavigate } from 'react-router-dom';
-import { UseLogin } from '../../HOOKS/UseLogin';
+import { useSigninUser } from '../../HOOKS/UseSignin';
+import { useState } from 'react';
 
 const Signin: React.FC = () => {
 
-    const authenticateUser = UseLogin();
-
-    const SetLogin = () => {
-        authenticateUser();
-        navigate('/');
-    }
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const signinUser = useSigninUser(); // Correctly using the custom hook here
     const navigate = useNavigate();
+
+    const SetLogin = async () => {
+        await signinUser(email, password); // Await the async call
+        navigate('/'); // Redirect after signing in
+    };
 
     const handleNavigate = (nav: string) => {
         navigate(nav, { replace: true });
@@ -44,6 +47,7 @@ const Signin: React.FC = () => {
                         name="username"
                         autoComplete="username"
                         autoFocus
+                        onChange={(e) => { setEmail(e.target.value); console.log(email) }}
                     />
                     <TextField
                         margin="normal"
@@ -54,6 +58,7 @@ const Signin: React.FC = () => {
                         type="password"
                         id="password"
                         autoComplete="current-password"
+                        onChange={(e) => setPassword(e.target.value)}
                     />
                     <FormControlLabel
                         control={<Checkbox value="remember" color="primary" />}

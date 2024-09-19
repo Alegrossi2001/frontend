@@ -1,3 +1,8 @@
+export interface AuthenticationResponse {
+    message: string;
+    user: User;
+}
+
 export interface User {
     id: string;                     // Unique identifier for the user
     username: string;               // Username of the user

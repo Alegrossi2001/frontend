@@ -39,7 +39,6 @@ export default function PerformanceDashboard() {
                 <Grid size={2} container justifyContent="center">
                     <Counter count={totalScore ?? 0} label="My Score" />
                     <Counter count={feedbackReceived} label="Feedback received" />
-
                 </Grid>
             </Grid>
             <Grid container spacing={2}>

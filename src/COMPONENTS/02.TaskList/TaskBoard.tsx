@@ -1,5 +1,4 @@
 import DataTable, { TableColumn } from "react-data-table-component"
-import { tempdata } from "./TEMP/data"
 import { useState } from "react";
 import TaskModal from "./TaskModal";
 import TaskInteractionBar from "./TaskInteractionBar";
