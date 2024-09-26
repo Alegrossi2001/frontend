@@ -1,5 +1,5 @@
 import React, { useState, MouseEvent } from 'react';
-import { Avatar, Menu, MenuItem, IconButton, ListItem, Divider, Box, Icon } from '@mui/material';
+import { Avatar, Menu, MenuItem, IconButton, ListItem, Divider, Box } from '@mui/material';
 import { useNavigate } from 'react-router-dom';
 import { Numbers, Person } from '@mui/icons-material';
 import { useSelector } from 'react-redux';
@@ -12,7 +12,6 @@ const UserProfileAvatar: React.FC = () => {
     //Hooks
     const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
     const navigate = useNavigate();
-    const HandleLogout = console.log("Hello");
 
     const handleClick = (event: MouseEvent<HTMLElement>) => {
         setAnchorEl(event.currentTarget);

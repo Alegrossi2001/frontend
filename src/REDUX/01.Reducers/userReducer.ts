@@ -12,8 +12,7 @@ interface UserInfoUpdated {
 type UserAction = UserInfoAdded | UserInfoUpdated;
 
 const initialState: User = {
-    id: '',
-    username: 'Gino',
+    username: '',
     email: '',
     avatarUrl: '',
     availableBadges: [],
@@ -21,8 +20,10 @@ const initialState: User = {
     level: 0,
     points: 0,
     tasksCompleted: 0,
-    lastLogin: new Date(),
-    bio: ''
+    lastLogin: "Today",
+    bio: '',
+    experience: 0,
+    userId: ''  // or some default value
 };
 
 // Reducer

@@ -9,7 +9,6 @@ export function AddUserInfo() {
     const addUserInfo = () => {
 
         const userPayload: User = {
-            id: '123',
             username: 'johndoe',
             email: 'johndoe@example.com',
             avatarUrl: 'https://example.com/avatar.jpg',
@@ -18,8 +17,10 @@ export function AddUserInfo() {
             level: 1,
             points: 100,
             tasksCompleted: 10,
-            lastLogin: new Date(),
+            lastLogin: "Howdy",
             bio: 'This is a short bio for the user',
+            experience: 100,
+            userId: '123',
         };
 
         const action: any = {

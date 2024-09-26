@@ -4,6 +4,9 @@ import TaskModal from "./TaskModal";
 import TaskInteractionBar from "./TaskInteractionBar";
 import { Task } from "../../INTERFACES/Task";
 import store from "../../REDUX/00.Store/store";
+//socket
+import openSocket from 'socket.io-client';
+import { useEffect } from "react";
 
 const Dropdown: React.FC<{
     options: { value: Task['status']; label: string }[];
@@ -20,6 +23,33 @@ const Dropdown: React.FC<{
 );
 
 export default function TaskBoard() {
+
+    //Connect to socket on component mount
+    const socket = openSocket('http://localhost:4000');
+
+    useEffect(() => {
+
+        socket.on('connect', () => {
+            console.log('Connected to server');
+            socket.emit('requestTasks');
+        });
+
+        socket.on('tasks', (receivedTasks: Task[]) => {
+            console.log('Received tasks:', receivedTasks);
+            setData(receivedTasks);
+        });
+
+        socket.on('error', (errorMessage) => {
+            console.error('Error received from server:', errorMessage);
+        });
+
+        return () => {
+            socket.off('tasks');
+            socket.off('error');
+            socket.off('connect');
+            socket.disconnect();
+        };
+    }, [socket]);
 
     const [getTask, setTask] = useState<Task | undefined>();
     const [data, setData] = useState<Task[]>(store.getState().tasks || []);

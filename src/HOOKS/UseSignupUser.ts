@@ -1,20 +1,22 @@
-import { useDispatch } from 'react-redux';
-import { AuthenticationResponse } from '../INTERFACES/User';
 import axios from 'axios';
+import { AuthResponse } from '../INTERFACES/Requests/AuthResponse';
 
-export const useSigninUser = () => {
-    const dispatch = useDispatch(); // Ensure this is used within a hook or component
+export const useSignupUser = () => {
 
-    const signinUser = async (email: string, password: string) => {
+    const signupUser = async (email: string, password: string, username: string, role: string) => {
         try {
-            const response = await axios.post(`http://localhost:4000/auth/signin`, { email, password });
-            console.log(response);
-            // Dispatch necessary action to save user or authentication token
-            // e.g. dispatch(userAuthenticated(response.data));
+            const response = await axios.post<AuthResponse>(`http://localhost:4000/auth/signup`, { email, password, username, role });
+            return response.data;
         } catch (error) {
-            console.error("Error signing in", error);
-        }
+            console.error("Error signing up", error);
+            if (axios.isAxiosError(error)) {
+                return error.response?.data;
+            }
+            return { message: "An unknown error occurred", status: 500 };
+
+        };
     };
 
-    return signinUser;
+
+    return signupUser;
 };

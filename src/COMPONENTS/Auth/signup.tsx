@@ -3,6 +3,7 @@ import { Container, Box, Avatar, Typography, TextField, Button, Link as MuiLink,
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { Link } from 'react-router-dom';
+import { useSignupUser } from '../../HOOKS/UseSignupUser';
 
 const Signup: React.FC = () => {
 
@@ -11,12 +12,20 @@ const Signup: React.FC = () => {
     const [validateEmail, setValidateEmail] = useState('');
     const [username, setUsername] = useState('');
     const [password, setPassword] = useState('');
-    const signup = console.log('signup');
+    const signupUser = useSignupUser();
+
+    //Snackbar for errors and redirect to signin
 
     const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         try {
-            //await (await signup).authenticateUser();
+            if (email !== validateEmail) {
+                throw new Error("Emails do not match");
+            }
+            else {
+                const response = await signupUser(email, password, username, "user");
+                console.log(response);
+            }
         }
         catch (error) {
             console.error(error);
@@ -56,9 +65,9 @@ const Signup: React.FC = () => {
                         margin="normal"
                         required
                         fullWidth
-                        id="email"
+                        id="validateEmail"
                         label="Validate Email Address"
-                        name="email"
+                        name="validateEmail"
                         autoComplete="email"
                         autoFocus
                         value={validateEmail}
@@ -97,11 +106,9 @@ const Signup: React.FC = () => {
                     </Button>
                     <Grid container>
                         <Grid item>
-                            <Link to="/signin" style={{ textDecoration: 'none' }}>
-                                <MuiLink variant="body2">
-                                    {"Already have an account? Sign In"}
-                                </MuiLink>
-                            </Link>
+                            <MuiLink component={Link} to="/signin" variant="body2">
+                                {"Already have an account? Sign In"}
+                            </MuiLink>
                         </Grid>
                     </Grid>
                 </Box>
